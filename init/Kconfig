@@ -1299,6 +1299,15 @@ config CC_OPTIMIZE_FOR_SIZE
 
 endchoice
 
+config LLVM_POLLY
+	bool "Use Clang Polly optimizations"
+	depends on CC_IS_CLANG
+	default y
+	help
+	  This option enables Clang's polyhedral loop optimizer known as
+	  Polly. Polly is able to optimize various loops throughout the
+	  kernel for cache locality.
+
 config HAVE_LD_DEAD_CODE_DATA_ELIMINATION
 	bool
 	help
