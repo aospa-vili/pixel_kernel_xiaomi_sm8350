@@ -790,6 +790,24 @@ KBUILD_CFLAGS	+= -mllvm -polly \
 endif
 endif
 
+ifdef CONFIG_LLVM_MLGO
+ifeq ($(call cc-option-yn, -mllvm -regalloc-enable-advisor=release),y)
+KBUILD_CFLAGS	+= -mllvm -regalloc-enable-advisor=release
+KBUILD_LDFLAGS	+= -mllvm -regalloc-enable-advisor=release
+else ifeq ($(call cc-option-yn, -mllvm -regalloc-enable-advisor=default),y)
+KBUILD_CFLAGS	+= -mllvm -regalloc-enable-advisor=default
+KBUILD_LDFLAGS	+= -mllvm -regalloc-enable-advisor=default
+endif
+
+ifeq ($(call cc-option-yn, -mllvm -enable-ml-inliner=release),y)
+KBUILD_CFLAGS	+= -mllvm -enable-ml-inliner=release
+KBUILD_LDFLAGS	+= -mllvm -enable-ml-inliner=release
+else ifeq ($(call cc-option-yn, -mllvm -enable-ml-inliner=default),y)
+KBUILD_CFLAGS	+= -mllvm -enable-ml-inliner=default
+KBUILD_LDFLAGS	+= -mllvm -enable-ml-inliner=default
+endif
+endif
+
 ifdef CONFIG_CC_WERROR
 KBUILD_CFLAGS  += -Werror
 endif

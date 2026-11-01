@@ -1308,6 +1308,14 @@ config LLVM_POLLY
 	  Polly. Polly is able to optimize various loops throughout the
 	  kernel for cache locality.
 
+config LLVM_MLGO
+	bool "Use LLVM Machine Learning Guided Optimizations (MLGO)"
+	depends on CC_IS_CLANG
+	default y
+	help
+	  This option enables LLVM Machine Learning Guided Optimizations
+	  (MLGO) for inlining and register allocation advisor policies.
+
 config HAVE_LD_DEAD_CODE_DATA_ELIMINATION
 	bool
 	help
